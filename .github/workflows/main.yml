@@ -17,7 +17,8 @@ jobs:
     container: ghcr.io/ssrobins/docker-linux-build:gcc9.3.0
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Print environment variables
         run: env
