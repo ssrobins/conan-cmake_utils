@@ -14,6 +14,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    container: ghcr.io/ssrobins/docker-linux-build:gcc9.3.0
 
     steps:
       - uses: actions/checkout@v2
