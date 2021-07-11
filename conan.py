@@ -4,6 +4,8 @@ import os.path
 import subprocess
 
 def main():
+    os.environ["CONAN_V2_MODE"] = "1"
+
     script_path = os.path.dirname(os.path.realpath(__file__))
 
     remote_url = "https://ssrobins.jfrog.io/artifactory/api/conan/conan"
