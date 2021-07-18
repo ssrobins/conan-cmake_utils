@@ -36,7 +36,7 @@ jobs:
         run: ./conan.py
 
       - name: Conan package upload
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/conan_v2'
         run: |
           conan user --password ${{ secrets.ARTIFACTORY_API_KEY }} --remote artifactory-ssrobins ${{ secrets.ARTIFACTORY_USER }}
           conan upload $(conan inspect --raw name .) --all --remote artifactory-ssrobins --confirm --parallel
