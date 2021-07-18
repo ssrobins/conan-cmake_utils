@@ -15,7 +15,7 @@ function(target_assets target_name assets_path)
             add_custom_command(
                 TARGET ${target_name}
                 PRE_BUILD
-                COMMAND python3 ${CONAN_CMAKE_UTILS_ROOT}/add_xcode_folder_reference.py
+                COMMAND python3 ${cmake_utils_PACKAGE_FOLDER_RELEASE}/add_xcode_folder_reference.py
                     --project=${CMAKE_BINARY_DIR}/${PROJECT_NAME}.xcodeproj/project.pbxproj
                     --folderPath=${assets_path} --target=${target_name}
             )
