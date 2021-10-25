@@ -1,4 +1,5 @@
-from conans import ConanFile
+from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain
+from conans import ConanFile, tools
 
 class Conan(ConanFile):
     name = "cmake_utils"
@@ -6,9 +7,17 @@ class Conan(ConanFile):
     description = "Shared CMake utilities"
     license = "MIT"
     url = f"https://github.com/ssrobins/conan-{name}"
+    settings = "os", "compiler", "build_type", "arch"
+    generators = "CMakeDeps"
     revision_mode = "scm"
     exports = "*"
-    build_policy = "missing"
+    #build_policy = "missing"
+
+    def generate(self):
+        tc = CMakeToolchain(self)
+        tc.generate()
+        deps = CMakeDeps(self)
+        deps.generate()
 
     def package(self):
         self.copy("*.cmake")
@@ -19,3 +28,4 @@ class Conan(ConanFile):
 
     def package_info(self):
         self.env_info.PYTHONPATH.append(self.package_folder)
+        tools.collect_libs(self)
