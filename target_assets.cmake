@@ -19,17 +19,12 @@ function(target_assets target_name)
             set_source_files_properties(${assets_path} PROPERTIES
                 MACOSX_PACKAGE_LOCATION Resources
             )
-        elseif(ANDROID)
-            set(assets_dest_path ${androidstudio_path}/app/src/main/assets/${assets_dir})
-            add_custom_command(
-                TARGET ${target_name}
-                PRE_BUILD
-                COMMAND cmake -E copy_directory
-                    ${assets_path}
-                    ${assets_dest_path}
-            )
         else()
-            set(assets_dest_path $<TARGET_FILE_DIR:${target_name}>/${assets_dir})
+            if(ANDROID)
+                set(assets_dest_path ${androidstudio_path}/app/src/main/assets/${assets_dir})
+            else()
+                set(assets_dest_path $<TARGET_FILE_DIR:${target_name}>/${assets_dir})
+            endif()
             add_custom_command(
                 TARGET ${target_name}
                 PRE_BUILD
